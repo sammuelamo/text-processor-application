@@ -20,19 +20,15 @@ import javafx.stage.Stage;
 import javafx.scene.*;
 import java.io.*;
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TextProcessorController implements Initializable {
 
-
     public TextField regex_textField;
     public TextArea input_field;
-    public Label label_button;
     public TextFlow text_area_field;
     public Button results_button;
     public Button replace_button;
@@ -54,6 +50,23 @@ public class TextProcessorController implements Initializable {
 
         //dataManager.printDataMap();
         tableView.getItems().setAll(dataManager.getDataMap().entrySet());
+    }
+    @FXML
+    private void mapTextToSize() {
+        String text = getTextFieldData();
+
+        if (text.isEmpty()) {
+            showErrorDialog("Error", "Please enter some text to map to its size.");
+            return;
+        }
+
+        String textWithoutSpaces = text.replaceAll("\\s+", "");
+        int textSize = textWithoutSpaces.length();
+
+        dataManager.addToMap(textSize, text);
+
+        addToTable();
+        input_field.clear();
     }
 
     @Override
@@ -174,7 +187,6 @@ public class TextProcessorController implements Initializable {
         scroll_pane.setContent(text_area_field);
     }
 
-
     private void replaceText() {
         String regex = getRegularExpression();
         String text = getTextFieldData();
@@ -214,7 +226,6 @@ public class TextProcessorController implements Initializable {
         }
     }
 
-
     private void clearFields() {
         if (regex_textField.getText().isEmpty() && input_field.getText().isEmpty() && replace_field.getText().isEmpty()) {
             showErrorDialog("Info", "There is nothing to clear.");
@@ -237,23 +248,6 @@ public class TextProcessorController implements Initializable {
         alert.showAndWait();
     }
 
-    @FXML
-    private void mapTextToSize() {
-        String text = getTextFieldData();
-
-        if (text.isEmpty()) {
-            showErrorDialog("Error", "Please enter some text to map to its size.");
-            return;
-        }
-
-        String textWithoutSpaces = text.replaceAll("\\s+", "");
-        int textSize = textWithoutSpaces.length();
-
-        dataManager.addToMap(textSize, text);
-
-        addToTable();
-        input_field.clear();
-    }
 
     private void showEditDialog(Map.Entry<Integer, String> rowData) {
         // Create a new Stage (window) for the edit dialog
