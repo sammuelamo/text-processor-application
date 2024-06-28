@@ -1,0 +1,80 @@
+/* Root style */
+.root {
+    -fx-background-color: #f9fafb;
+    -fx-padding: 20px;
+    -fx-font-family: "Segoe UI", "Roboto", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+/* TextField and TextArea styles */
+.text-field, .text-area {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 6px;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-focus-color: #4f46e5;
+}
+
+.text-field:focused, .text-area:focused {
+    -fx-border-color: #4f46e5;
+}
+
+/* Button styles */
+.button {
+    -fx-background-color: #4f46e5;
+    -fx-text-fill: white;
+    -fx-border-radius: 6px;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 4);
+}
+
+.button:hover {
+    -fx-background-color: #4338ca;
+}
+
+.button:pressed {
+    -fx-background-color: #3730a3;
+}
+
+/* Label styles */
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #4b5563;
+}
+
+/* VBox styles */
+.vbox {
+    -fx-spacing: 15px;
+}
+
+/* TextFlow styles */
+.text-flow {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 6px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 4);
+}
+
+/* Text styles */
+.text-flow .text {
+    -fx-font-size: 14px;
+    -fx-fill: #1f2937;
+}
+.dialog-pane {
+    -fx-background-color: #f0f0f0;
+}
+
+.dialog-pane .dialog-header {
+    -fx-background-color: #2196F3; /* Blue */
+    -fx-text-fill: white;
+}
+
+.dialog-pane .dialog-content {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
