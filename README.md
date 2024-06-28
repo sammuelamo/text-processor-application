@@ -90,4 +90,3 @@ Special thanks to the developers and contributors of the JavaFX framework and th
 
 ---
 
-This README provides a comprehensive overview of the Text Processor application, including its features, project structure, usage instructions, and dependencies. Feel free to modify and enhance this document as needed.
