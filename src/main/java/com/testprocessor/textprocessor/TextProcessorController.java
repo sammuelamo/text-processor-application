@@ -107,6 +107,7 @@ public class TextProcessorController implements Initializable {
                 }
             });
 
+
             contextMenu.getItems().addAll(updateItem, deleteItem, populateItem);
             row.contextMenuProperty().bind(
                     javafx.beans.binding.Bindings.when(row.emptyProperty())
@@ -138,6 +139,7 @@ public class TextProcessorController implements Initializable {
     }
 
     private void displayResults() {
+
         String regex = getRegularExpression();
         String text = getTextFieldData();
 
@@ -150,22 +152,28 @@ public class TextProcessorController implements Initializable {
             return;
         }
 
-        // highlightPatterns(text, regex);
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
 
-        List<String> matches = textProcessor.findMatches(text, regex);
-        int count = textProcessor.countWordsMatchingPattern(text, regex);
-
-        StringBuilder resultText = new StringBuilder("Matches found:\n");
-        for (String match : matches) {
-            resultText.append(match).append("\n");
-        }
-        resultText.append("\nTotal Matches: ").append(count);
-
-        Text resultDisplay = new Text(resultText.toString());
         text_area_field.getChildren().clear();
-        text_area_field.getChildren().add(resultDisplay);
+        int lastEnd = 0;
+        while (matcher.find()) {
+            if (lastEnd < matcher.start()) {
+                Text before = new Text(text.substring(lastEnd, matcher.start()));
+                text_area_field.getChildren().add(before);
+            }
+            Text highlightedText = new Text(matcher.group());
+            highlightedText.setFill(Color.GREEN); // You can choose any color you prefer
+            text_area_field.getChildren().add(highlightedText);
+            lastEnd = matcher.end();
+        }
+        if (lastEnd < text.length()) {
+            Text after = new Text(text.substring(lastEnd));
+            text_area_field.getChildren().add(after);
+        }
         scroll_pane.setContent(text_area_field);
     }
+
 
     private void replaceText() {
         String regex = getRegularExpression();
@@ -324,6 +332,7 @@ public class TextProcessorController implements Initializable {
         alert.showAndWait();
     }
 
+    //gives the user the opportunity to export the work done
     private void exportToFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Export Text File");
