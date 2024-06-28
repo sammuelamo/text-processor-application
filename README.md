@@ -84,10 +84,6 @@ The controller class that handles UI interactions, binds UI components to method
 - JavaFX: Ensure JavaFX is properly set up in your development environment.
 - Java 11 or later.
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Acknowledgements
 
 Special thanks to the developers and contributors of the JavaFX framework and the OpenJDK project.
